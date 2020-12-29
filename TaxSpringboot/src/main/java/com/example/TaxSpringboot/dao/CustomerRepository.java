@@ -16,9 +16,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>{
 	Customer getCustByPan(String pan);
 	
 	
-	@Query("update Customer t set t.taxForm=:tot  where t.customerId=:id1")
-	int updateCust(TaxForm tot, long id1);
-	
-	
 
 }

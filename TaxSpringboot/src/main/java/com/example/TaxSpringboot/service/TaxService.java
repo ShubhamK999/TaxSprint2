@@ -30,10 +30,34 @@ public class TaxService implements TaxServiceInterface {
 	public int addTaxDetailsByNewCustomerService(TaxForm objTaxForm) {
 		tr.save(objTaxForm);
 		Customer c = cr.getCustByPan(objTaxForm.getPan());
-		System.out.println(objTaxForm.getPan());
-		System.out.println(c.getPan());
-		int i = cr.updateCust(objTaxForm, c.getCustomerId());
-		return i;
+		c.setTaxForm(objTaxForm);
+		cr.save(c);
+		//int i = cr.updateCust(objTaxForm, c.getCustomerId());
+		return 1;
 	}
 
+	@Override
+	public int addTaxDetailsByCustomerService(TaxForm objTaxForm) {
+		TaxForm t = tr.findById(objTaxForm.getTaxformId()).orElse(null);
+		t.setTotalIncomeSalary(objTaxForm.getTotalIncomeSalary());
+		t.setOtherIncome(objTaxForm.getOtherIncome());
+		t.setInterestIncome(objTaxForm.getInterestIncome());
+		t.setRentalIncome(objTaxForm.getRentalIncome());
+		t.setPpf(objTaxForm.getPpf());
+		t.setMedicalInsurance(objTaxForm.getMedicalInsurance());
+		t.setEducaionLoan(objTaxForm.getEducaionLoan());
+		t.setNps(objTaxForm.getNps());
+		t.setSavingsInterest(objTaxForm.getSavingsInterest());
+		t.setVerifiedStatus("Pending");
+		t.setPayableTax(objTaxForm.getPayableTax());
+		t.setTaxformId(objTaxForm.getTaxformId());
+		tr.save(t);
+		Customer c1 = cr.getCustByPan(objTaxForm.getPan());
+		c1.setTaxForm(objTaxForm);
+		cr.save(c1);
+		return 1;
+	}
+
+	
+	
 }

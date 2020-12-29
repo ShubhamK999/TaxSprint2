@@ -13,7 +13,7 @@ public class TaxController {
 	@Autowired
 	private TaxServiceInterface tsi;
 	
-	@PutMapping("/taxform")
+	@PutMapping("/taxDetailsForEmployee")
 	public String addTaxDetailsForEmployee(@RequestBody TaxForm objTaxForm) {
 		String str = "Taxform details not added";
 		int i = tsi.addTaxDetailsForEmployeeService(objTaxForm);
@@ -28,6 +28,16 @@ public class TaxController {
 	public String addTaxDetailsByNewCustomer(@RequestBody TaxForm objTaxForm) {
 		String str= "Taxform details not added";
 		int i = tsi.addTaxDetailsByNewCustomerService(objTaxForm);
+		if(i>0) {
+			str = "Taxform details added successfully(New Customer)";
+		}
+		return str;
+	}
+	
+	@PutMapping("/taxDetailsByCustomer")
+	public String addTaxDetailsByCustomer(@RequestBody TaxForm objTaxForm) {
+		String str= "Taxform details not added";
+		int i = tsi.addTaxDetailsByCustomerService(objTaxForm);
 		if(i>0) {
 			str = "Taxform details added successfully(New Customer)";
 		}

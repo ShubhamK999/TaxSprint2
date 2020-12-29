@@ -8,4 +8,6 @@ public interface TaxServiceInterface {
 
 	int addTaxDetailsByNewCustomerService(TaxForm objTaxForm);
 
+	int addTaxDetailsByCustomerService(TaxForm objTaxForm);
+
 }
