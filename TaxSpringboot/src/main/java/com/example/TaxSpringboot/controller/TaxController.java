@@ -39,7 +39,7 @@ public class TaxController {
 		String str= "Taxform details not added";
 		int i = tsi.addTaxDetailsByCustomerService(objTaxForm);
 		if(i>0) {
-			str = "Taxform details added successfully(New Customer)";
+			str = "Taxform details added successfully";
 		}
 		return str;
 		
